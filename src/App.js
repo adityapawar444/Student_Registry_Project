@@ -2,7 +2,6 @@ import NewStudentForm from "./components/Form/NewStudentForm";
 import StudentList from "./components/Display/StudentList";
 import { useState } from "react";
 
-const DATA = [];
 
 function App() {
 

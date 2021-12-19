@@ -1,6 +1,11 @@
 import TextInput from "./TextInput";
 import { useState } from "react";
 
+import Card from "../Display/Card";
+import Button from "../Display/Button";
+
+import styles from './NewStudentForm.module.css'
+
 function NewStudentForm(props) {
   const [currName, setCurrName] = useState("");
 
@@ -35,21 +40,23 @@ function NewStudentForm(props) {
   };
 
   return (
-    <form onSubmit={submitButtonHandler}>
-      <TextInput
-        label="Name"
-        changeEvent={nameChangeHandler}
-        ph={currName}
-      //  reset={isNameReset}
-      ></TextInput>
-      <TextInput
-        label="Class"
-        changeEvent={classChangeHandler}
-        ph={currClass}
-      ///  reset={isClassReset}
-      ></TextInput>
-      <button type="submit">Add Student</button>
-    </form>
+    <Card className={styles.input}>
+      <form onSubmit={submitButtonHandler}>
+        <TextInput
+          label="Name"
+          changeEvent={nameChangeHandler}
+          ph={currName}
+          //  reset={isNameReset}
+        ></TextInput>
+        <TextInput
+          label="Class"
+          changeEvent={classChangeHandler}
+          ph={currClass}
+          ///  reset={isClassReset}
+        ></TextInput>
+        <Button type="submit">Add Student</Button>
+      </form>
+    </Card>
   );
 }
 

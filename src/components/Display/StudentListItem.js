@@ -1,8 +1,14 @@
 function StudentListItem(props){
 
+  console.log(props.input);
+
+      
     return (
       <div>
-        <p>{props.input.name} {props.input.class}</p>
+        <p>
+         Full Name : {props.input.firstName} {props.input.lastName}
+        </p>
+        <p>Course : {props.input.course}</p>
       </div>
     );
 }

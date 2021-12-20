@@ -3,56 +3,72 @@ import { useState } from "react";
 
 import Card from "../Display/Card";
 import Button from "../Display/Button";
+import Wrapper from "../Helper/Wrapper";
 import ErroModal from "../Display/ErrorModal";
+import Dropdown from "./Dropdown";
 
-import styles from './NewStudentForm.module.css'
+import styles from "./NewStudentForm.module.css";
 
 function NewStudentForm(props) {
-  const [currName, setCurrName] = useState("");
+  const [firstName, setfirstName] = useState("");
 
-  const [currClass, setCurrClass] = useState("");
+  const [lastName, setlastName] = useState("");
 
-  const [error,setError] = useState();
+  const [course, setCourse] = useState("NONE");
+
+  const [error, setError] = useState();
 
   const submitButtonHandler = (event) => {
     event.preventDefault();
 
-    if(currName.trim().length === 0 || currClass.trim().length === 0){
+    if (firstName.trim().length === 0 || lastName.trim().length === 0) {
       setError({
-        title:"Invalid Input",
-        content:"Fields cannot be empty!!!"
-      })
+        title: "Invalid Input",
+        content: "Fields cannot be empty!!!",
+      });
+      return;
+    }
+
+    if(course === "NONE"){
+      setError({
+        title: "Invalid Input",
+        content: "Please Select a Course!!!",
+      });
       return;
     }
 
     const student = {
       key: Math.random().toString(),
-      name: currName,
-      class: currClass,
+      firstName: firstName,
+      lastName: lastName,
+      course: course,
     };
 
-    setCurrName("");
-    setCurrClass("");
+    setfirstName("");
+    setlastName("");
+    setCourse("NONE");
 
     props.onFormSubmit(student);
-
   };
 
-  const nameChangeHandler = (changedInput) => {
-    setCurrName(changedInput);
+  const firstNameChangeHandler = (changedInput) => {
+    setfirstName(changedInput);
   };
 
-  const classChangeHandler = (changedInput) => {
-    setCurrClass(changedInput);
+  const lastNameChangeHandler = (changedInput) => {
+    setlastName(changedInput);
   };
 
-const errorhandler = () =>{
-  setError(null);
-}
+  const courseChangehandler = (changedInput) => {
+    setCourse(changedInput);
+  };
 
+  const errorhandler = () => {
+    setError(null);
+  };
 
   return (
-    <div>
+    <Wrapper>
       {error && (
         <ErroModal
           title={error.title}
@@ -63,21 +79,25 @@ const errorhandler = () =>{
       <Card className={styles.input}>
         <form onSubmit={submitButtonHandler}>
           <TextInput
-            label="Name"
-            changeEvent={nameChangeHandler}
-            value={currName}
-            //  reset={isNameReset}
+            label="First Name"
+            changeEvent={firstNameChangeHandler}
+            value={firstName}
           ></TextInput>
           <TextInput
-            label="Class"
-            changeEvent={classChangeHandler}
-            value={currClass}
-            ///  reset={isClassReset}
+            label="Last Name"
+            changeEvent={lastNameChangeHandler}
+            value={lastName}
           ></TextInput>
+          <Dropdown
+            value={course}
+            optionsData={props.dropdownData}
+            label="Select Course"
+            onChange={courseChangehandler}
+          />
           <Button type="submit">Add Student</Button>
         </form>
       </Card>
-    </div>
+    </Wrapper>
   );
 }
 

@@ -2,8 +2,7 @@ function StudentListItem(props){
 
     return (
       <div>
-        <p>{props.input.name}</p>
-        <p>{props.input.class}</p>
+        <p>{props.input.name} {props.input.class}</p>
       </div>
     );
 }

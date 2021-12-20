@@ -3,7 +3,7 @@ function TextInput(props) {
     props.changeEvent(event.target.value);
   };
  
-  if (props.ph.length === 0) {
+  if (props.value.length === 0) {
     return (
       <div>
         <label>{props.label} : </label>
@@ -22,7 +22,7 @@ function TextInput(props) {
       <label>{props.label} : </label>
       <input
         type="text"
-        value={props.ph}
+        value={props.value}
         onChange={textInputChangeHandler}
       ></input>
     </div>

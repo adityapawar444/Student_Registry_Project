@@ -1,20 +1,30 @@
 
 import StudentListItem from "./StudentListItem";
+import Card from "./Card";
+
+import classes from './StudentList.module.css';
 
 function StudentList(props) {
 
     if(props.data.length === 0){
-        return <p>No records Found</p>
+        return (
+          <Card className={classes.users}>
+            <ul>
+              <li>No records Found</li>
+            </ul>
+          </Card>
+        );
     }
   return (
-    <div>
-      {props.data.map((studentData) => (
-        <StudentListItem
-          key={studentData.key}
-          input={studentData}
-        ></StudentListItem>
-      ))}
-    </div>
+    <Card className={classes.users}>
+      <ul>
+        {props.data.map((studentData) => (
+          <li key={studentData.key}>
+            <StudentListItem input={studentData}></StudentListItem>
+          </li>
+        ))}
+      </ul>
+    </Card>
   );
 }
 
